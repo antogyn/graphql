@@ -1,8 +1,6 @@
 import { ArgumentsHost } from '@nestjs/common';
 
-export const mergeArgumentsHost = <T extends ArgumentsHost>(
-  host: ArgumentsHost,
-): T =>
+export const mergeArgumentsHost = <T extends ArgumentsHost>(host: ArgumentsHost): T =>
   (Object.assign(
     {
       getRoot: () => host.getArgByIndex(0),

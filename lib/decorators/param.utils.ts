@@ -29,8 +29,7 @@ const assignMetadata = (
 
 export const createGqlParamDecorator = (paramtype: GqlParamtype) => {
   return (data?: ParamData): ParameterDecorator => (target, key, index) => {
-    const args =
-      Reflect.getMetadata(PARAM_ARGS_METADATA, target.constructor, key) || {};
+    const args = Reflect.getMetadata(PARAM_ARGS_METADATA, target.constructor, key) || {};
     Reflect.defineMetadata(
       PARAM_ARGS_METADATA,
       assignMetadata(args, paramtype, index, data),
@@ -48,8 +47,7 @@ export const addPipesMetadata = (
   key: string | symbol,
   index: number,
 ) => {
-  const args =
-    Reflect.getMetadata(PARAM_ARGS_METADATA, target.constructor, key) || {};
+  const args = Reflect.getMetadata(PARAM_ARGS_METADATA, target.constructor, key) || {};
   const hasParamData = isNil(data) || isString(data);
   const paramData = hasParamData ? data : undefined;
   const paramPipes = hasParamData ? pipes : [data, ...pipes];

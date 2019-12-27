@@ -3,9 +3,7 @@ import { ExecutionContextHost } from '@nestjs/core/helpers/execution-context-hos
 import { mergeArgumentsHost } from '../utils/merge-arguments-host.util';
 import { GraphQLArgumentsHost } from './gql-arguments-host';
 
-export interface GraphQLExecutionContext
-  extends ExecutionContext,
-    GraphQLArgumentsHost {
+export interface GraphQLExecutionContext extends ExecutionContext, GraphQLArgumentsHost {
   getRoot<T = any>(): T;
   getInfo<T = any>(): T;
   getArgs<T = any>(): T;

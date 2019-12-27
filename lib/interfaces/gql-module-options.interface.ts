@@ -28,11 +28,7 @@ export interface GqlModuleOptions
     Partial<
       Pick<
         ServerRegistration,
-        | 'onHealthCheck'
-        | 'disableHealthCheck'
-        | 'path'
-        | 'cors'
-        | 'bodyParserConfig'
+        'onHealthCheck' | 'disableHealthCheck' | 'path' | 'cors' | 'bodyParserConfig'
       >
     > {
   typeDefs?: string | string[];
@@ -42,9 +38,7 @@ export interface GqlModuleOptions
   resolverValidationOptions?: IResolverValidationOptions;
   directiveResolvers?: any;
   schemaDirectives?: Record<string, any>;
-  transformSchema?: (
-    schema: GraphQLSchema,
-  ) => GraphQLSchema | Promise<GraphQLSchema>;
+  transformSchema?: (schema: GraphQLSchema) => GraphQLSchema | Promise<GraphQLSchema>;
   definitions?: {
     path?: string;
     outputAs?: 'class' | 'interface';

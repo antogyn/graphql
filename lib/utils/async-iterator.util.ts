@@ -30,8 +30,7 @@ export const createAsyncIterator = async <T = any>(
       return getNextValue();
     },
     return() {
-      const isAsyncIterator =
-        asyncIterator && typeof asyncIterator.return === 'function';
+      const isAsyncIterator = asyncIterator && typeof asyncIterator.return === 'function';
 
       return isAsyncIterator
         ? asyncIterator.return()

@@ -21,13 +21,8 @@ export class DelegatesExplorerService extends BaseExplorerService {
   }
 
   explore() {
-    const modules = this.getModules(
-      this.modulesContainer,
-      this.gqlOptions.include || [],
-    );
-    const delegates = this.flatMap(modules, instance =>
-      this.filterDelegates(instance),
-    );
+    const modules = this.getModules(this.modulesContainer, this.gqlOptions.include || []);
+    const delegates = this.flatMap(modules, instance => this.filterDelegates(instance));
     return this.curryDelegates(this.groupMetadata(delegates));
   }
 
@@ -38,10 +33,8 @@ export class DelegatesExplorerService extends BaseExplorerService {
     }
     const prototype = Object.getPrototypeOf(instance);
     const predicate = (resolverType, isDelegated) => !isDelegated;
-    const resolvers = this.metadataScanner.scanFromPrototype(
-      instance,
-      prototype,
-      name => extractMetadata(instance, prototype, name, predicate),
+    const resolvers = this.metadataScanner.scanFromPrototype(instance, prototype, name =>
+      extractMetadata(instance, prototype, name, predicate),
     );
     return resolvers
       .filter(resolver => !!resolver)

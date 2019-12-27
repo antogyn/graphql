@@ -19,19 +19,10 @@ export interface ArgsOptions extends BasicOptions {
 }
 export function Args();
 export function Args(...pipes: (Type<PipeTransform> | PipeTransform)[]);
+export function Args(property: string, ...pipes: (Type<PipeTransform> | PipeTransform)[]);
+export function Args(options: ArgsOptions, ...pipes: (Type<PipeTransform> | PipeTransform)[]);
 export function Args(
-  property: string,
-  ...pipes: (Type<PipeTransform> | PipeTransform)[]
-);
-export function Args(
-  options: ArgsOptions,
-  ...pipes: (Type<PipeTransform> | PipeTransform)[]
-);
-export function Args(
-  propertyOrOptions?:
-    | string
-    | (Type<PipeTransform> | PipeTransform)
-    | ArgsOptions,
+  propertyOrOptions?: string | (Type<PipeTransform> | PipeTransform) | ArgsOptions,
   ...pipes: (Type<PipeTransform> | PipeTransform)[]
 ) {
   let typeFn = undefined;
@@ -59,9 +50,6 @@ export function Args(
         lazyMetadataStorage.store(() =>
           TypeGqlArg(property, typeFn, argOptions)(target, key, index),
         )
-      : TypeGqlArgs &&
-        lazyMetadataStorage.store(() =>
-          TypeGqlArgs(typeFn)(target, key, index),
-        );
+      : TypeGqlArgs && lazyMetadataStorage.store(() => TypeGqlArgs(typeFn)(target, key, index));
   };
 }

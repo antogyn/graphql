@@ -38,8 +38,7 @@ describe('GraphQL - Pipes', () => {
                     {
                       children: [],
                       constraints: {
-                        length:
-                          'description must be longer than or equal to 30 characters',
+                        length: 'description must be longer than or equal to 30 characters',
                       },
                       property: 'description',
                       target: {
@@ -56,8 +55,7 @@ describe('GraphQL - Pipes', () => {
                     {
                       children: [],
                       constraints: {
-                        length:
-                          'description must be longer than or equal to 30 characters',
+                        length: 'description must be longer than or equal to 30 characters',
                       },
                       property: 'description',
                       target: {
@@ -83,8 +81,7 @@ describe('GraphQL - Pipes', () => {
                 {
                   children: [],
                   constraints: {
-                    length:
-                      'description must be longer than or equal to 30 characters',
+                    length: 'description must be longer than or equal to 30 characters',
                   },
                   property: 'description',
                   target: {

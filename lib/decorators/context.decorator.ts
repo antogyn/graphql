@@ -5,10 +5,7 @@ import { createGqlPipesParamDecorator } from './param.utils';
 
 export function Context();
 export function Context(...pipes: (Type<PipeTransform> | PipeTransform)[]);
-export function Context(
-  property: string,
-  ...pipes: (Type<PipeTransform> | PipeTransform)[]
-);
+export function Context(property: string, ...pipes: (Type<PipeTransform> | PipeTransform)[]);
 export function Context(
   property?: string | (Type<PipeTransform> | PipeTransform),
   ...pipes: (Type<PipeTransform> | PipeTransform)[]

@@ -4,10 +4,7 @@ import { flattenDeep, groupBy, identity, isEmpty, mapValues } from 'lodash';
 import { ResolverMetadata } from '../interfaces/resolver-metadata.interface';
 
 export class BaseExplorerService {
-  getModules(
-    modulesContainer: Map<string, Module>,
-    include: Function[],
-  ): Module[] {
+  getModules(modulesContainer: Map<string, Module>, include: Function[]): Module[] {
     if (!include || isEmpty(include)) {
       return [...modulesContainer.values()];
     }
@@ -15,10 +12,7 @@ export class BaseExplorerService {
     return whitelisted;
   }
 
-  includeWhitelisted(
-    modulesContainer: Map<string, Module>,
-    include: Function[],
-  ): Module[] {
+  includeWhitelisted(modulesContainer: Map<string, Module>, include: Function[]): Module[] {
     return [...modulesContainer.values()].filter(({ metatype }) =>
       include.some(item => item === metatype),
     );
@@ -30,9 +24,7 @@ export class BaseExplorerService {
   ): T[] {
     const invokeMap = () =>
       modules.map(module =>
-        [...module.providers.values()].map(wrapper =>
-          callback(wrapper, module),
-        ),
+        [...module.providers.values()].map(wrapper => callback(wrapper, module)),
       );
     return flattenDeep(invokeMap()).filter(identity);
   }

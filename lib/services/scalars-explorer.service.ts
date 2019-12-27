@@ -22,13 +22,8 @@ export class ScalarsExplorerService extends BaseExplorerService {
   }
 
   explore() {
-    const modules = this.getModules(
-      this.modulesContainer,
-      this.gqlOptions.include || [],
-    );
-    return this.flatMap<any>(modules, instance =>
-      this.filterImplicitScalar(instance),
-    );
+    const modules = this.getModules(this.modulesContainer, this.gqlOptions.include || []);
+    return this.flatMap<any>(modules, instance => this.filterImplicitScalar(instance));
   }
 
   filterImplicitScalar<T extends any = any>(wrapper: InstanceWrapper<T>) {
@@ -36,12 +31,8 @@ export class ScalarsExplorerService extends BaseExplorerService {
     if (!instance) {
       return undefined;
     }
-    const metadata = Reflect.getMetadata(
-      SCALAR_NAME_METADATA,
-      instance.constructor,
-    );
-    const bindContext = (fn: Function | undefined) =>
-      fn ? fn.bind(instance) : undefined;
+    const metadata = Reflect.getMetadata(SCALAR_NAME_METADATA, instance.constructor);
+    const bindContext = (fn: Function | undefined) => (fn ? fn.bind(instance) : undefined);
 
     return metadata
       ? {
@@ -57,13 +48,8 @@ export class ScalarsExplorerService extends BaseExplorerService {
   }
 
   getScalarsMap() {
-    const modules = this.getModules(
-      this.modulesContainer,
-      this.gqlOptions.include || [],
-    );
-    return this.flatMap<any>(modules, instance =>
-      this.filterExplicitScalar(instance),
-    );
+    const modules = this.getModules(this.modulesContainer, this.gqlOptions.include || []);
+    return this.flatMap<any>(modules, instance => this.filterExplicitScalar(instance));
   }
 
   filterExplicitScalar<T extends any = any>(wrapper: InstanceWrapper<T>) {
@@ -71,22 +57,13 @@ export class ScalarsExplorerService extends BaseExplorerService {
     if (!instance) {
       return undefined;
     }
-    const scalarNameMetadata = Reflect.getMetadata(
-      SCALAR_NAME_METADATA,
-      instance.constructor,
-    );
-    const scalarTypeMetadata = Reflect.getMetadata(
-      SCALAR_TYPE_METADATA,
-      instance.constructor,
-    );
-    const bindContext = (fn: Function | undefined) =>
-      fn ? fn.bind(instance) : undefined;
+    const scalarNameMetadata = Reflect.getMetadata(SCALAR_NAME_METADATA, instance.constructor);
+    const scalarTypeMetadata = Reflect.getMetadata(SCALAR_TYPE_METADATA, instance.constructor);
+    const bindContext = (fn: Function | undefined) => (fn ? fn.bind(instance) : undefined);
 
     return scalarNameMetadata
       ? {
-          type:
-            (isFunction(scalarTypeMetadata) && scalarTypeMetadata()) ||
-            instance.constructor,
+          type: (isFunction(scalarTypeMetadata) && scalarTypeMetadata()) || instance.constructor,
           scalar: new GraphQLScalarType({
             name: scalarNameMetadata,
             description: instance['description'],
